@@ -72,7 +72,7 @@ const Modal: FC<ModalProps> = ({
         <div className="realtive w-full md:w-4/6 lg:w-3/6 xl:w-2/5 my-6 mx-auto h-full lg:h-auto md:h-auto">
           <div
             className={`translate duration-300 h-full 
-            ${showModal ? "translate-0" : `translate-y-full`}
+            ${showModal ? "translate-y-0" : `translate-y-full`}
             ${showModal ? "opacity-100" : `opacity-0`}
             `}
           >
