@@ -91,7 +91,7 @@ const RegisterModal = () => {
         outline
         label="Contunie with Google"
         icon={FcGoogle}
-        onClick={() => {}}
+        onClick={() => signIn("google")}
       />
       <Button
         outline
