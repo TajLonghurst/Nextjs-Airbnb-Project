@@ -36,14 +36,14 @@ const UserMenu: FC<UserMenuProps> = ({ currentUser }) => {
           className="p-4 md:py-1 md:px-2 border-[1px] border-neutral-200 flex flex-row  items-center rounded-full gap-3 cursor-pointer hover:shadow-md transition"
         >
           <AiOutlineMenu />
-          <div className="hidden md:block">
+          <div className="hidden md:block select-none">
             <Avatar src={currentUser?.image} />
           </div>
         </div>
       </div>
       {isOpen && (
         <div className="absolute rounded-xl shadow-md w-[40vw] md:w-3/4 bg-white overflow-hidden right-0 top-12 text-sm">
-          <div className="flex flex-col cursor-pointer">
+          <div className="flex flex-col cursor-pointer select-none">
             {currentUser ? (
               <Fragment>
                 <MenuItem onClick={() => {}} label="My trips" />
