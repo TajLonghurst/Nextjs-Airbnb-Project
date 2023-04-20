@@ -7,6 +7,9 @@ import Heading from "../Heading";
 import { categories } from "../Navbar/Categories";
 import CategorieInput from "../Inputs/CategorieInput";
 import { FieldValues, useForm } from "react-hook-form";
+import CountrySelect from "../Inputs/CountrySelect";
+import Map from "../Map";
+import dynamic from "next/dynamic";
 
 enum STEPS {
   CATEGORY = 0,
@@ -42,7 +45,13 @@ const RentModal = () => {
     },
   });
 
-  const category = watch("category");
+  const category = watch("category"); // https://youtu.be/c_-b_isI4vg?t=13940 watch this vid to understand
+  const location = watch("location"); //Watch() method makes it so your pervois selcted options are remebered
+
+  const Map = useMemo(
+    () => dynamic(() => import("../Map"), { ssr: false }),
+    [location]
+  );
 
   const setCustomeValue = (id: string, value: any) => {
     setValue(id, value, {
@@ -103,6 +112,22 @@ const RentModal = () => {
         <Heading
           title="Where is your place located?"
           subtitle="Help guests find u!"
+        />
+        <CountrySelect
+          value={location}
+          onChange={(value) => setCustomeValue("location", value)}
+        />
+        <Map center={location?.latlng} />
+      </div>
+    );
+  }
+
+  if (step == STEPS.INFO) {
+    bodyContent = (
+      <div className="flex flex-col gap-8">
+        <Heading
+          title="Share some basics about your place"
+          subtitle="What amenities do you have?"
         />
       </div>
     );
