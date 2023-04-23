@@ -1,7 +1,6 @@
 "use client";
 
 import React, { FC } from "react";
-import { text } from "stream/consumers";
 
 interface HeadingProps {
   title: string;
