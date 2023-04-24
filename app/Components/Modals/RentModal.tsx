@@ -89,7 +89,7 @@ const RentModal = () => {
       setIsLoading(true);
       await axios.post("/api/listings", data);
       toast.success("Listing Created!");
-      router.refresh();
+      router.refresh(); // This will refresh the page adding in the new conent as normally done by SSR.
       reset();
       setStep(STEPS.CATEGORY);
       rentModal.onClose();
