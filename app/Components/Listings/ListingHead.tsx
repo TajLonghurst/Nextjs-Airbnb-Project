@@ -1,0 +1,49 @@
+"use client";
+
+import useCountries from "@/app/Hooks/useCountries";
+import { safeUser } from "@/app/Types";
+import React, { FC, Fragment } from "react";
+import Heading from "../Heading";
+import Image from "next/image";
+import HeartButton from "../HeartButton";
+
+interface ListingHeadProps {
+  title: string;
+  locationValue: string;
+  imageSrc: string;
+  id: string;
+  currentUser?: safeUser | null;
+}
+
+const ListingHead: FC<ListingHeadProps> = ({
+  title,
+  locationValue,
+  imageSrc,
+  id,
+  currentUser,
+}) => {
+  const { getByValue } = useCountries();
+  const location = getByValue(locationValue);
+
+  return (
+    <Fragment>
+      <Heading
+        title={title}
+        subtitle={`${location?.region}, ${location?.label}`}
+      />
+      <div className="w-full h-[60vh] overflow-hidden rounded-xl relative">
+        <Image
+          alt="Image"
+          src={imageSrc}
+          fill
+          className="object-cover w-full"
+        />
+        <div className="absolute top-5 right-5">
+          <HeartButton listingId={id} currentUser={currentUser} />
+        </div>
+      </div>
+    </Fragment>
+  );
+};
+
+export default ListingHead;
