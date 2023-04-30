@@ -85,18 +85,18 @@ const RentModal = () => {
     if (step !== STEPS.PRICE) {
       return onNext();
     }
+    setIsLoading(true);
     try {
-      setIsLoading(true);
       await axios.post("/api/listings", data);
       toast.success("Listing Created!");
       router.refresh(); // This will refresh the page adding in the new conent as normally done by SSR.
       reset();
       setStep(STEPS.CATEGORY);
       rentModal.onClose();
-      setIsLoading(false);
     } catch (error) {
       toast.error("Something went wrong");
     }
+    setIsLoading(false);
   };
 
   const actionLabel = useMemo(() => {

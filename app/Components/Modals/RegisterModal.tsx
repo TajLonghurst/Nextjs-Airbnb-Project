@@ -32,14 +32,14 @@ const RegisterModal = () => {
   });
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    setIsLoading(true);
     try {
-      setIsLoading(true);
       await axios.post("/api/register", data);
       registerModal.onClose();
-      setIsLoading(false);
     } catch (error) {
       toast.error("Something went wrong");
     }
+    setIsLoading(false);
   };
 
   const toggle = useCallback(() => {
