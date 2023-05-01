@@ -12,6 +12,8 @@ import { useRouter } from "next/navigation";
 import { eachDayOfInterval, differenceInCalendarDays } from "date-fns";
 import axios from "axios";
 import { toast } from "react-hot-toast";
+import ListingResveration from "@/app/Components/Listings/ListingResveration";
+import { Range } from "react-date-range";
 
 const initialDateRange = {
   startDate: new Date(),
@@ -51,7 +53,7 @@ const ListingClient: FC<ListingClientProps> = ({
 
   const [isLoading, setIsloading] = useState(false);
   const [totalPrice, setTotalPrice] = useState(listing.price);
-  const [dateRange, setDateRange] = useState(initialDateRange);
+  const [dateRange, setDateRange] = useState<Range>(initialDateRange);
 
   const onCreateResveration = useCallback(async () => {
     if (!currentUser) {
@@ -60,7 +62,7 @@ const ListingClient: FC<ListingClientProps> = ({
 
     setIsloading(true);
     try {
-      await axios.post("/api/resvervations", {
+      await axios.post("/api/reservations", {
         totalPrice,
         startDate: dateRange.startDate,
         endDate: dateRange.endDate,
@@ -72,7 +74,7 @@ const ListingClient: FC<ListingClientProps> = ({
 
       //Redirect to /trips
       router.refresh();
-    } catch (err) {
+    } catch (err: any) {
       toast.error("Something went wrong");
     }
     setIsloading(false);
@@ -120,6 +122,17 @@ const ListingClient: FC<ListingClientProps> = ({
               bathroomCount={listing.guestCount}
               locationValue={listing.locationValue}
             />
+            <div className="order-first mb-10 md:order-last md:col-span-3">
+              <ListingResveration
+                price={listing.price}
+                totalPrice={totalPrice}
+                onChangeDate={(value) => setDateRange(value)}
+                dateRange={dateRange}
+                onSubmit={onCreateResveration}
+                disabled={isLoading}
+                disabledDates={disabledDates}
+              />
+            </div>
           </div>
         </div>
       </div>
