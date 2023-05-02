@@ -70,9 +70,7 @@ const ListingClient: FC<ListingClientProps> = ({
 
       toast.success("Listing Reserved");
       setDateRange(initialDateRange);
-
-      //Redirect to /trips
-      router.refresh();
+      router.push("/trips");
     } catch (err: any) {
       toast.error("Something went wrong");
     }
@@ -102,7 +100,7 @@ const ListingClient: FC<ListingClientProps> = ({
 
   return (
     <Container>
-      <div className="max-w-screen-lg mx-auto mt-5">
+      <div className="max-w-screen-lg mx-auto ">
         <div className="flex flex-col gap-6">
           <ListingHead
             title={listing.title}
