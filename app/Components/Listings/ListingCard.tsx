@@ -63,8 +63,6 @@ const ListingCard: FC<ListingCardProps> = ({
     return `${format(start, "PP")} - ${format(end, "PP")}`;
   }, [resveration]);
 
-  // console.log("LOCATION", location);
-
   return (
     <div
       onClick={() => router.push(`/listings/${data.id}`)}

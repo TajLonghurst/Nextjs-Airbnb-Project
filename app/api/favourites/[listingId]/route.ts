@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import getCurrentUser from "@/app/Actions/getCurrentUser";
 import prisma from "@/app/Libs/Prismadb";
-import { data } from "autoprefixer";
 
 interface IParams {
   listingId?: string;
