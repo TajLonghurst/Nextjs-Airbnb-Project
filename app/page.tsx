@@ -3,6 +3,7 @@ import getListings, { IListingsParams } from "./Actions/getListings";
 import Container from "./Components/Container";
 import EmptyState from "./Components/EmptyState";
 import ListingCard from "./Components/Listings/ListingCard";
+import { Suspense, Fragment } from "react";
 
 interface HomeProps {
   searchParams: IListingsParams;
@@ -16,20 +17,26 @@ const Home = async ({ searchParams }: HomeProps) => {
     return <EmptyState showReset />;
   }
 
+  const PlaceHolder = () => {
+    return <Fragment></Fragment>;
+  };
+
   return (
-    <Container>
-      <div className="pt-[8rem] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8">
-        {listings.map((listing) => {
-          return (
-            <ListingCard
-              currentUser={currentUser}
-              key={listing.id}
-              data={listing}
-            />
-          );
-        })}
-      </div>
-    </Container>
+    <Suspense fallback={<PlaceHolder />}>
+      <Container>
+        <div className="pt-[8rem] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8">
+          {listings.map((listing) => {
+            return (
+              <ListingCard
+                currentUser={currentUser}
+                key={listing.id}
+                data={listing}
+              />
+            );
+          })}
+        </div>
+      </Container>
+    </Suspense>
   );
 };
 
