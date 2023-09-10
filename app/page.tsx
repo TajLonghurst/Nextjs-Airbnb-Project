@@ -10,6 +10,7 @@ interface HomeProps {
 
 export const dynamic = "force-dynamic";
 
+//searchParams is prop nextjs RSC provided to accsess the url params
 const Home = async ({ searchParams }: HomeProps) => {
   const listings = await getListings(searchParams);
   const currentUser = await getCurrentUser();
